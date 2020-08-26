@@ -1,0 +1,63 @@
+<Row@Label>:
+	#texture_size: root.width, None
+	text_size: self.width, None
+
+<AppLayout>:
+	rv:rv
+	run:run
+	av:new_item_input
+	rows: 2
+	size: root.width, root.height
+	padding:5
+	GridLayout:
+		cols:1
+		size: self.width,self.minimum_height
+		size_hint_y:15
+		ScrollView:
+			do_scroll_x: False
+			do_scroll_y: True
+			size_hint_y: None
+			size: root.width,950
+			#pos:sel.pos
+			RecycleView:
+				id: rv
+				size: self.size
+			
+				viewclass: 'Label'
+				RecycleBoxLayout:
+					default_size: dp(60), dp(30)
+					#default_size_hint: 1, None
+					size_hint_y:None
+					
+				
+					height: self.minimum_height
+					orientation: 'vertical'
+					spacing: dp(1)
+
+	GridLayout:
+		cols:3
+		#focus:True
+
+
+		TextInput:
+			id: new_item_input
+			multiline: False
+			size_hint_x: 10
+			size_hint_y: 0.1
+			hint_text: 'Type here'
+			focus: True
+			#run.focus: True
+		Button:
+			id:lis
+			text: 'Voice'
+			size_hint_y: 0.1
+			on_press: root.listen()
+
+			
+		Button:
+			id:run
+			text: 'Send'
+			size_hint_y: 0.1
+			on_press: root.send_msg(new_item_input.text)
+		
+		
